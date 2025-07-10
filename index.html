@@ -2,81 +2,33 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>รายการลิงก์</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>📁 รายการลิงก์โฟลเดอร์</title>
   <style>
     body {
       font-family: 'Sarabun', sans-serif;
-      background: #f9f9f9;
-      padding: 20px;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
     }
-    h1 {
+
+    header {
+      background-color: #1a73e8;
+      color: white;
+      padding: 1rem;
       text-align: center;
-      color: #333;
+      font-size: 1.5rem;
     }
-    table {
+
+    iframe {
       width: 100%;
-      max-width: 700px;
-      margin: auto;
-      border-collapse: collapse;
-      background: white;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    th, td {
-      padding: 12px 20px;
-      border-bottom: 1px solid #eee;
-      text-align: left;
-    }
-    a {
-      color: #1a73e8;
-      text-decoration: none;
-      font-weight: 500;
-    }
-    a:hover {
-      text-decoration: underline;
+      height: calc(100vh - 70px);
+      border: none;
     }
   </style>
 </head>
 <body>
-  <h1>รายการลิงก์</h1>
-  <table id="linkTable">
-    <thead>
-      <tr><th>ชื่อ (คลิกเพื่อเปิดโฟลเดอร์)</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>กำลังโหลด...</td></tr>
-    </tbody>
-  </table>
-
-  <script>
-    const appUrl = "https://script.google.com/macros/s/AKfycbzRIUdzGF3z9NYsxIQ8rzx7XXFsFiBzmgoxb8XuJDUwd0Pzg_Z2x0mv5gZLnkvVMW6-ig/exec";
-
-    fetch(appUrl)
-      .then(res => res.text())
-      .then(html => {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, "text/html");
-        const rows = doc.querySelectorAll("table tr");
-        const tbody = document.querySelector("#linkTable tbody");
-        tbody.innerHTML = ""; // clear loading row
-
-        for (let i = 1; i < rows.length; i++) { // skip header
-          const cells = rows[i].querySelectorAll("td");
-          if (cells.length >= 2) {
-            const name = cells[0].textContent.trim();
-            const link = cells[1].textContent.trim();
-            const tr = document.createElement("tr");
-            const td = document.createElement("td");
-            td.innerHTML = `<a href="${link}" target="_blank">📁 ${name}</a>`;
-            tr.appendChild(td);
-            tbody.appendChild(tr);
-          }
-        }
-      })
-      .catch(err => {
-        document.querySelector("#linkTable tbody").innerHTML = "<tr><td>เกิดข้อผิดพลาดในการโหลดข้อมูล</td></tr>";
-        console.error("Error:", err);
-      });
-  </script>
+  <header>📁 รายการลิงก์โฟลเดอร์</header>
+  <iframe src="https://script.google.com/macros/s/AKfycbzRIUdzGF3z9NYsxIQ8rzx7XXFsFiBzmgoxb8XuJDUwd0Pzg_Z2x0mv5gZLnkvVMW6-ig/exec"></iframe>
 </body>
 </html>
